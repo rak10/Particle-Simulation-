@@ -61,7 +61,12 @@ int main(int argc, char* argv[])
 
 	Uint32 *buffer = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT]; //each pixel has 4 bytes, RGB and Alpha
 
-	memset(buffer, 255, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
+	memset(buffer, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32)); //set the buffer to black for the entire screen
+
+	for (int i = 0; i < SCREEN_WIDTH*SCREEN_HEIGHT; i++) //using a for loop ensures we can change individual pixels (4 bytes per pixel)
+	{
+		buffer[i] = 0x00FF80FF;
+	}
 
 	SDL_UpdateTexture(texture, NULL, buffer, SCREEN_WIDTH * sizeof(Uint32));
 	SDL_RenderClear(renderer);
