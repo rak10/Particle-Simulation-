@@ -66,7 +66,7 @@ bool Screen::init() {
 
 	for (int i = 0; i < SCREEN_WIDTH*SCREEN_HEIGHT; i++) //using a for loop ensures we can change individual pixels (4 bytes per pixel)
 	{
-		buffer[i] = 0x00FF80FF;
+		buffer[i] = 0xFFFF00FF;
 	}
 
 	SDL_UpdateTexture(m_texture, NULL, buffer, SCREEN_WIDTH * sizeof(Uint32));
@@ -80,7 +80,14 @@ bool Screen::init() {
 
 bool Screen::processEvents() {
 
-	return false;
+	SDL_Event event;
+	while (SDL_PollEvent (&event)) {
+		if (event.type == SDL_QUIT) {
+			return false;
+		}
+	}
+
+	return true;
 }
 
 void Screen::close() {
@@ -97,3 +104,4 @@ Screen::~Screen() {
 }
 
 } /* namespace cop */
+

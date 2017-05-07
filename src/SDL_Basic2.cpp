@@ -24,22 +24,16 @@ int main(int argc, char* argv[])
 	}
 
 
-	bool quit = false;
 
-	SDL_Event event;
-
-	while(!quit) {
+	while(true) {
 		//Update the position/states of particles
 		//draw particles
 		//check for messages and events such as if user clicks the window, button etc
 		//it raises an event and some data structure should be filled with some data
 
-		while(SDL_PollEvent(&event)) {
-			if(event.type == SDL_QUIT) {
-				SDL_Log("Program quit after %i ticks", event.quit.timestamp);
-				cout << "quit after : " << event.quit.timestamp << endl;
-				quit = true;
-			}
+			if(screen.processEvents() == false) {
+				break;
+
 		}
 	}
 
