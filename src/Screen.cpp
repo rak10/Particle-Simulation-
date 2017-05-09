@@ -60,21 +60,42 @@ bool Screen::init() {
 		return false;
 		}
 
-	Uint32 *buffer = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT]; //each pixel has 4 bytes, RGB and Alpha
+	m_buffer = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT]; //each pixel has 4 bytes, RGB and Alpha
 
-	memset(buffer, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32)); //set the buffer to black for the entire screen
+	memset(m_buffer, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32)); //set the buffer to black for the entire screen
 
-	for (int i = 0; i < SCREEN_WIDTH*SCREEN_HEIGHT; i++) //using a for loop ensures we can change individual pixels (4 bytes per pixel)
-	{
-		buffer[i] = 0xFFFF00FF;
-	}
+	//for (int i = 0; i < SCREEN_WIDTH*SCREEN_HEIGHT; i++) //using a for loop ensures we can change individual pixels (4 bytes per pixel)
+	//{
+	//	buffer[i] = 0xFFFF00FF;
+	//}
 
-	SDL_UpdateTexture(m_texture, NULL, buffer, SCREEN_WIDTH * sizeof(Uint32));
+
+	return true;
+
+}
+
+void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue) {
+
+	Uint32 color = 0;
+
+	color += red;
+	color <<= 8;
+	color += green;
+	color <<= 8;
+	color += blue;
+	color <<= 8;
+	color += 0xFF;
+
+	m_buffer[(y * SCREEN_WIDTH) + x] = color;
+
+}
+
+void Screen::update() {
+
+	SDL_UpdateTexture(m_texture, NULL, m_buffer, SCREEN_WIDTH * sizeof(Uint32));
 	SDL_RenderClear(m_renderer);
 	SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
 	SDL_RenderPresent(m_renderer);
-
-	return true;
 
 }
 
@@ -91,6 +112,7 @@ bool Screen::processEvents() {
 }
 
 void Screen::close() {
+
 	delete[] m_buffer;
 	SDL_DestroyRenderer (m_renderer);
 	SDL_DestroyTexture (m_texture);

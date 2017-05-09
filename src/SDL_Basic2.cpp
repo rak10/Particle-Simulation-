@@ -27,12 +27,24 @@ int main(int argc, char* argv[])
 
 	while(true) {
 		//Update the position/states of particles
-		//draw particles
+
 		//check for messages and events such as if user clicks the window, button etc
 		//it raises an event and some data structure should be filled with some data
 
-			if(screen.processEvents() == false) {
-				break;
+		//draw particles
+		for(int y = 0; y < Screen::SCREEN_HEIGHT; y++) {
+			for(int x = 0; x < Screen::SCREEN_WIDTH; x++) {
+				screen.setPixel(x ,y, 128, 0, 255);
+			}
+		}
+
+		screen.setPixel (400, 300, 255, 255, 255);
+		//Draw the screen
+		screen.update();
+
+		//Check for messages/updates
+		if(screen.processEvents() == false) {
+			break;
 
 		}
 	}
