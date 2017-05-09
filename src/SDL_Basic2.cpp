@@ -9,6 +9,7 @@
 #include <SDL.h>
 #include <cstring>
 #include "Screen.h"
+#include <math.h>
 using namespace std;
 using namespace cop;
 
@@ -31,14 +32,21 @@ int main(int argc, char* argv[])
 		//check for messages and events such as if user clicks the window, button etc
 		//it raises an event and some data structure should be filled with some data
 
+		//smooth changing of colours
+		int elapsed = SDL_GetTicks();
+		unsigned char green = 128 * (1+ sin(elapsed*0.0001));
+		unsigned char red = 128 * (1+ sin(elapsed*0.0002));
+		unsigned char blue = 128 * (1+ sin(elapsed*0.0003));
+		//cout << "Red: " << red << " Green: " << green << " Blue :" << blue << endl;
 		//draw particles
 		for(int y = 0; y < Screen::SCREEN_HEIGHT; y++) {
 			for(int x = 0; x < Screen::SCREEN_WIDTH; x++) {
-				screen.setPixel(x ,y, 128, 0, 255);
+				screen.setPixel(x ,y, red, green, blue);
+
 			}
 		}
 
-		screen.setPixel (400, 300, 255, 255, 255);
+
 		//Draw the screen
 		screen.update();
 
