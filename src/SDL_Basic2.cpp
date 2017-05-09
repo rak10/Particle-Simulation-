@@ -10,19 +10,24 @@
 #include <cstring>
 #include "Screen.h"
 #include <math.h>
+#include <stdlib.h>
+#include <time.h>
+#include "Swarm.h"
 using namespace std;
 using namespace cop;
 
 int main(int argc, char* argv[])
 {
 
-
+	srand(time(NULL));
 
 	Screen screen;
 
 	if(screen.init() == false) {
 		cout << "Error initialising SDL." << endl;
 	}
+
+	Swarm swarm;
 
 
 
@@ -32,9 +37,19 @@ int main(int argc, char* argv[])
 		//check for messages and events such as if user clicks the window, button etc
 		//it raises an event and some data structure should be filled with some data
 
+		const Particle * const pParticles = swarm.getParticles();
+		for (int i = 0; i< Swarm::NPARTICLES; i++) {
+			Particle particle = pParticles[i];
+
+			int x = (particle.m_x + 1) * Screen::SCREEN_WIDTH/2;
+			int y = (particle.m_y + 1) * Screen::SCREEN_HEIGHT/2;
+
+			screen.setPixel (x, y, 255 ,255, 255);
+		}
+
 		//smooth changing of colours
 		int elapsed = SDL_GetTicks();
-		unsigned char green = 128 * (1+ sin(elapsed*0.0001));
+		/*unsigned char green = 128 * (1+ sin(elapsed*0.0001));
 		unsigned char red = 128 * (1+ sin(elapsed*0.0002));
 		unsigned char blue = 128 * (1+ sin(elapsed*0.0003));
 		//cout << "Red: " << red << " Green: " << green << " Blue :" << blue << endl;
@@ -44,7 +59,7 @@ int main(int argc, char* argv[])
 				screen.setPixel(x ,y, red, green, blue);
 
 			}
-		}
+		}*/
 
 
 		//Draw the screen
