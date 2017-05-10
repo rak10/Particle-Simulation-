@@ -32,6 +32,7 @@ public:
 	bool processEvents();
 	void close();
 	virtual ~Screen();
+	void clear();
 };
 
 } /* namespace cop */
