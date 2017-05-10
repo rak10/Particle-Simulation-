@@ -36,6 +36,12 @@ int main(int argc, char* argv[])
 
 		//check for messages and events such as if user clicks the window, button etc
 		//it raises an event and some data structure should be filled with some data
+		int elapsed = SDL_GetTicks();
+		unsigned char green = 128 * (1 + sin(elapsed * 0.0001));
+		unsigned char red = 128 * (1 + sin(elapsed * 0.0002));
+		unsigned char blue = 128 * (1 + sin(elapsed * 0.0003));
+		//cout << "Red: " << red << " Green: " << green << " Blue :" << blue << endl;
+		//draw particles
 
 		const Particle * const pParticles = swarm.getParticles();
 		for (int i = 0; i< Swarm::NPARTICLES; i++) {
@@ -44,22 +50,16 @@ int main(int argc, char* argv[])
 			int x = (particle.m_x + 1) * Screen::SCREEN_WIDTH/2;
 			int y = (particle.m_y + 1) * Screen::SCREEN_HEIGHT/2;
 
-			screen.setPixel (x, y, 255 ,255, 255);
+			screen.setPixel (x, y, red, green, blue);
 		}
 
-		//smooth changing of colours
-		int elapsed = SDL_GetTicks();
-		/*unsigned char green = 128 * (1+ sin(elapsed*0.0001));
-		unsigned char red = 128 * (1+ sin(elapsed*0.0002));
-		unsigned char blue = 128 * (1+ sin(elapsed*0.0003));
-		//cout << "Red: " << red << " Green: " << green << " Blue :" << blue << endl;
-		//draw particles
+		/*smooth changing of colours
 		for(int y = 0; y < Screen::SCREEN_HEIGHT; y++) {
 			for(int x = 0; x < Screen::SCREEN_WIDTH; x++) {
 				screen.setPixel(x ,y, red, green, blue);
 
-			}
-		}*/
+			}*/
+
 
 
 		//Draw the screen
