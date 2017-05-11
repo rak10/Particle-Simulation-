@@ -16,7 +16,7 @@ private:
 
 
 public:
-	const static int NPARTICLES = 2000;
+	const static int NPARTICLES = 5000;
 	Swarm();
 	virtual ~Swarm();
 	const Particle * const getParticles() { return m_pParticles; };

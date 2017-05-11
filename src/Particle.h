@@ -13,8 +13,9 @@ namespace cop {
 struct Particle {
 	double m_x;
 	double m_y;
-	double m_xspeed;
-	double m_yspeed;
+
+	double m_speed; //how fast a particle is moving
+	double m_direction; //angle from 0 to 360 degrees
 
 
 public:
