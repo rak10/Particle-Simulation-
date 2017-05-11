@@ -19,7 +19,7 @@ struct Particle {
 
 
 public:
-	void update();
+	void update(int interval);
 	Particle();
 	virtual ~Particle();
 };

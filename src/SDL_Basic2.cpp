@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 		//it raises an event and some data structure should be filled with some data
 		int elapsed = SDL_GetTicks();
 		screen.clear();
-		swarm.update();
+		swarm.update(elapsed);
 
 		unsigned char green = 128 * (1 + sin(elapsed * 0.0001));
 		unsigned char red = 128 * (1 + sin(elapsed * 0.0002));

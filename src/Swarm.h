@@ -13,6 +13,7 @@ namespace cop {
 class Swarm {
 private:
 	Particle *m_pParticles;
+	int lastTime;
 
 
 public:
@@ -20,7 +21,7 @@ public:
 	Swarm();
 	virtual ~Swarm();
 	const Particle * const getParticles() { return m_pParticles; };
-	void update();
+	void update(int elapsed);
 };
 
 } /* namespace cop */
