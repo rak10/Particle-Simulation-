@@ -14,14 +14,18 @@ struct Particle {
 	double m_x;
 	double m_y;
 
+private:
 	double m_speed; //how fast a particle is moving
 	double m_direction; //angle from 0 to 360 degrees
 
+private:
+	void init();
 
 public:
 	void update(int interval);
 	Particle();
 	virtual ~Particle();
+
 };
 
 } /* namespace cop */
