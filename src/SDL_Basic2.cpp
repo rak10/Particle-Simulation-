@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 		//check for messages and events such as if user clicks the window, button etc
 		//it raises an event and some data structure should be filled with some data
 		int elapsed = SDL_GetTicks();
-		screen.clear();
+
 		swarm.update(elapsed);
 
 		unsigned char green = 128 * (1 + sin(elapsed * 0.0001));
@@ -57,6 +57,7 @@ int main(int argc, char* argv[])
 
 			}
 
+		screen.boxBlur();
 
 		//Draw the screen
 		screen.update();
